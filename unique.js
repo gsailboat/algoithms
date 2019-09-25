@@ -5,7 +5,7 @@ var unique = function(string) {
 	for (var i = 0; i < string.length; i++) {
 		
 		if (used.includes(string[i]) && used !== "") {
-			console.log("No");
+			console.log(string[-4]);
 			//console.log(used);
 			return false;
 		}

@@ -14,4 +14,4 @@ var addDigits = function(num) {
 	return addDigits(answer);	
 };
 
-console.log(addDigits(447));
+console.log(addDigits(8885));
