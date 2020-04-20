@@ -16,4 +16,4 @@ var oneaway = function(one, two) {
 		return false;
 }
 
-console.log(oneaway('park', 'pani'));
+console.log(oneaway('paxrk', 'park'));

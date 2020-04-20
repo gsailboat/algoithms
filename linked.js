@@ -175,61 +175,129 @@ function LinkedList() {
 	this.partition = function(value) {
 		let start = head;
 		let lower = null;
+		let lowerStart = null;
 		let higher = null;
+		let higherStart = null;
 
-		console.log(start);
 		while (start) {
 			let current = new Node(start.element);
 
 			if (start.element < value) {
-				if (!lower)
-					lower = current;
+				if (!lowerStart){
+					lowerStart = current;
+					lower = lowerStart;
+				}
 				else {
-					while(lower.next)
-						lower = lower.next;
 					lower.next = current;
+					lower = current;
 				}
 			}
 			else {
-				if (!higher)
-					higher = current
+				if (!higher) {
+					higherStart = current;
+					higher = higherStart;
+				}
 				else {
-					while(higher.next)
-						higher = higher.next;
-					higher.next = current;
+					higher.next = start;
+					higher = start;
 				}
 			}
 			start = start.next;
 		}
-		console.log("lower", lower);
-		console.log("higher", higher);
-		while(lower.next){
-			// console.log(lower);
-			lower = lower.next;
+		if (lowerStart === null)
+			head = higherStart;
+		else {
+			lower.next = higherStart;
+			head = lowerStart;
 		}
-		// console.log(lower);
-		lower.next = higher;
-		head = lower;
-		// console.log(head);
 	}
+
+	this.sumlists = function(other) {
+		let answer = 0;
+		let startone = head;
+		let starttwo = other;
+		let sum = null;
+		let current = null;
+
+		while (startone || startwo) {
+			if (!startone) {
+				answer += starttwo.element;
+			}
+			else if (!starttwo)
+				answer += startone.element;
+			else
+				answer += startone.element + starttwo.element;
+			let current = new Node(answer % 10);
+			if (!sum)
+				sum = current;
+			startone = startone.next ? startone.next : null;
+			starttwo = starttwo.next ? starttwo.next : null;
+
+
+		}
+		return answer;
+	}
+
+	this.palindrome = function() {
+		let start = head;
+		let run = head;
+		let stack = [];
+
+		while(run !== null && run.next !== null) {
+			stack.push(start.element);
+			start = start.next;
+			run = run.next.next;
+		}
+
+		if (run !== null){
+			start = start.next;
+		}
+
+		while (start !== null) {
+			if (stack[stack.length - 1] !== start.element)
+				return false;
+			start = start.next;
+			stack.pop();
+		}
+		return true;
+	}
+
+	// this.intersection = function(two) {
+	// 	let start = head;
+	// 	console.log(length, two.size());
+
+	// 	while (start)
+	// 		start = start.next;
+	// 	while ()
+	// 	if (length > two.size())
+	// 		for (i = 0; i < length - two.size; i++) {
+	// 			start = start.next;
+	// 		}
+
+	// }
 }
 
 var conga = new LinkedList();
+var tango = new LinkedList();
+conga.add(2);
+conga.add(2);
 conga.add(1);
-//console.log(conga);
-conga.add(1);
-// conga.add(2);
-// console.log(conga);
-// console.log(conga.head)
-//console.log(conga.indexOf('Puppy'));
-// conga.add(2);
-conga.add(5);
-conga.add(3);
-conga.partition(2);
+conga.add(2);
+conga.add(2);
+tango.add(1);
+tango.add(2);
+tango.add(2);
 console.log(conga.head());
+// console.log(conga.intersection(tango))
+console.log(conga.palindrome());
+// console.log(conga.head());
+
+// conga.partition(2);
+// console.log(conga.palindrome());
+// console.log(conga.head());
 // console.log("One", conga.size());
 // console.log("One", conga.head());
-conga.removeDups();
+// conga.removeDups();
 // console.log(3, conga.size());
 // console.log(3, conga.head());
 // console.log(1, conga.nthtoLast(2));

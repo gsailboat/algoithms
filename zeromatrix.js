@@ -11,8 +11,6 @@ var zeromatrix = function(m) {
 				index.push([y, x]);
 		}
 	}
-	// index[[2, 1], [4, 2]]
-	// console.log(index);
 	for (i = 0; i < index.length; i++) {
 		for (j = 0; m[index[i][0]][j]; j++)
 		 m[index[i][0]][j] = 0;
